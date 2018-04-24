@@ -49,7 +49,7 @@ function GET_200() {
     echo -n "HTTP/1.0 200 OK$CRLF"
     echo -n "Server: $SERVERNAME$CRLF"
     content_type "$file"
-    # content_length "$file"
+    content_length "$file"
     echo -n "$CRLF"
 }
 
@@ -81,7 +81,17 @@ function dispatch() {
     local method=$1 path=$2
     webdir WEB_ROOT_DIR
     if [[ $method == GET ]]; then
-        if [[ $path == /*.html ]]  && path="$WEB_ROOT_DIR$path";then
+        if [[ $path == / ]]  && path="$WEB_ROOT_DIR$path";then
+            path=${path#../}
+            path=${path//\/..\//}
+            [ -d "$path" ] && path="$path/index.html"
+            if [ -f "$path" ]; then
+                GET_200 "$path"
+                cat "$path"
+            else
+                GET_404
+            fi
+        elif [[ $path == /*.html ]]  && path="$WEB_ROOT_DIR$path";then
             path=${path#../}
             path=${path//\/..\//}
             [ -d "$path" ] && path="$path/index.html"
