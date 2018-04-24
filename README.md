@@ -56,7 +56,7 @@ HTTP status code 404 NOT FOUND for HEAD request.
 
 ``dispatch``
 
-To track and validate the path of the requested fi,e.
+To track and validate the path of the requested file.
 
 ``run``
 
