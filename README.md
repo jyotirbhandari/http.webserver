@@ -11,9 +11,13 @@ The bash based webserver v0.01 renders ``GET`` and ``HEAD`` request. The standar
 ## Requirements
 
 ``bash``
+
 ``socat``
+
 ``file``
+
 ``wc``
+
 ``cat``
 
 ## Functions
